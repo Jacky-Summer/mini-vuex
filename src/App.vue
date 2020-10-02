@@ -1,28 +1,41 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <counter></counter>
+    <art-title></art-title>
+    <div class="wrapper">
+      <h3>App组件</h3>
+      <div>count: {{ count }}</div>
+      <div>title: {{ title }}</div>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { mapState, mapGetters } from './store/myvuex'
+
+import Counter from './components/Counter'
+import ArtTitle from './components/ArtTitle'
 
 export default {
   name: 'App',
+  created() {
+    console.log(this)
+  },
+  computed: {
+    ...mapState(['count']),
+    ...mapGetters(['title']),
+  },
   components: {
-    HelloWorld
-  }
+    Counter,
+    ArtTitle,
+  },
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style scoped>
+.wrapper {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid red;
 }
 </style>
